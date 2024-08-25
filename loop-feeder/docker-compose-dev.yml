@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  app:
+    container_name: loop-feeder-local
+    image: loop-feeder-local
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: npm run start:dev
+    ports:
+      - 4020:4020
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=dev
+      - PORT=4020
+      - MONGO_URI=mongodb+srv://doadmin:516Q84Wj7I02qzHJ@dev-feed-a79ee12b.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=dev-feed
+      - DB_NAME=dev_feed
+      - REDIS_HOST=128.199.132.175
+      - REDIS_PORT=6379
+      - RABBITMQ_URL=amqp://admin:password123@128.199.132.175:5672
+      - AUTH_SERVICE=https://api-dev.loopfreight.io/lf-auth/api/v1
+      - USER_SERVICE=https://api-dev.loopfreight.io/lf-user/api/v1
+      - SUPPLIER_SERVICE=https://api-dev.loopfreight.io/lf-sup/api/v1
+      - SUP_ASS_SERVICE=https://api-dev.loopfreight.io/lf-supa/api/v1
+      - BOOKING_SERVICE=https://api-dev.loopfreight.io/lf-booking/api/v1
+      - SECRET_KEY=hhggh5e45454gfgfcfcgfvhv434345678u
+      - SENTRY_DSN=https://2dbb7f5ffabe4936958a6b04f33617e4@o1151275.ingest.sentry.io/6290388
+      - SENTRY_ENV=develop
