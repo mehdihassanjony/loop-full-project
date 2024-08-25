@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: loop-auth
+    image: loop-auth
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: npm run start:prod
+    ports:
+      - 3070:3070
+    environment:
+      - PORT=3070
+      - NODE_ENV=develop
+      - DB_HOST=db-postgresql-sgp1-91717-do-user-10167635-0.b.db.ondigitalocean.com
+      - DB_USERNAME=devuser
+      - DB_PASSWORD=VBQb2YFRkaKVfukk
+      - DB_PORT=25060
+      - DB_NAME=develop_loop_user
+      - DB_TYPE=postgres
+      - JWT_SECRET=someSrotng34dffff
+      - REDIS_PASSWORD=tech@Strong123
+      - REDIS_HOST=128.199.132.175
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - RABBITMQ_HOST=amqp://admin:password123@128.199.132.175:5672
+      - SECRET_KEY=hhggh5e45454gfgfcfcgfvhv434345678u
+      - USER_SERVICE=https://api-dev.loopfreight.io/lf-user/api/v1
+      - COMPANY_SERVICE=https://api-dev.loopfreight.io/lf-company/api/v1
+      - SENTRY_DSN=https://2dbb7f5ffabe4936958a6b04f33617e4@o1151275.ingest.sentry.io/6290388
+      - SENTRY_ENV=development
