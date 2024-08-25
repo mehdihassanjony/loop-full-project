@@ -1,0 +1,10 @@
+FROM node:18.12.1-alpine AS build
+RUN apk update && apk add tzdata && apk --no-cache add curl
+ENV TZ=Asia/Dhaka
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN chown node:node /app
+USER node
+RUN npm run build

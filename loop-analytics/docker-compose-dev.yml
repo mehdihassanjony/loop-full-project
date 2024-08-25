@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  app:
+    container_name: loop-analytics-dev
+    image: loop-analytics-dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: npm run start:dev
+    ports:
+      - 3040:3040
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=develop
+      - PORT=3040
+      - DB_TYPE=postgres
+      - DB_HOST=db-postgresql-sgp1-91717-do-user-10167635-0.b.db.ondigitalocean.com
+      - DB_PORT=25060
+      - DB_USERNAME=devuser
+      - DB_PASSWORD=VBQb2YFRkaKVfukk
+      - DB_NAME=loop_freight_dev
+      - MB_DB_TYPE=postgres
+      - MB_DB_HOST=db-postgresql-sgp1-91717-do-user-10167635-0.b.db.ondigitalocean.com
+      - MB_DB_PORT=25060
+      - MB_DB_USERNAME=doadmin
+      - MB_DB_PASSWORD=Gq7WctaVjdVta1f4
+      - MB_DB_NAME=loop_mb_src_dev
+      - AUTH_SERVICE=https://api-dev.loopfreight.io/lf-auth/api/v1
+      - USER_SERVICE=https://api-dev.loopfreight.io/lf-user/api/v1
+      - COMPANY_SERVICE=https://api-dev.loopfreight.io/lf-company/api/v1
+      - SECRET_KEY=hhggh5e45454gfgfcfcgfvhv434345678u
+      - SENTRY_DSN=https://2dbb7f5ffabe4936958a6b04f33617e4@o1151275.ingest.sentry.io/6290388
+      - SENTRY_ENV=development
