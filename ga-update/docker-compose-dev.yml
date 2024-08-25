@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  app:
+    container_name: ga-update-local
+    image: ga-update-local
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: npm run start:dev
+    ports:
+      - 9000:9000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=dev
+      - PORT=9000
